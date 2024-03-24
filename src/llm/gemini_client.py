@@ -2,7 +2,7 @@ import google.generativeai as GAI
 
 from src.config import Config
 
-class GEMINI: 
+class Gemini: 
     def __init__(self): 
         config = Config()
         api_key = config.get_gemini_api_key()

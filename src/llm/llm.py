@@ -3,7 +3,7 @@ from enum import Enum
 from .ollama_client import Ollama
 from .claude_client import Claude
 from .openai_client import OpenAI
-from .gemini_client import GEMINI
+from .gemini_client import Gemini
 
 import tiktoken
 
@@ -23,7 +23,8 @@ class Model(Enum):
         )
         for model in Ollama.list_models()
     ]
-    GEMINI_MODELS = ("gemini-1.0-pro", "gemini-1.0-pro-001", "gemini-1.0-pro-latest", "gemini-pro")
+    GEMINI_1_0_PRO = ("Gemini 1.0 Pro", "gemini-1.0-pro")
+    GEMINI_1_5_PRO = ("Gemini 1.5 Pro", "gemini-pro")   
 
 class LLM:
     def __init__(self, model_id: str = None):
@@ -58,8 +59,8 @@ class LLM:
             response = Claude().inference(self.model_id, prompt).strip()
         elif "GPT" in str(model):
             response = OpenAI().inference(self.model_id, prompt).strip()
-        elif "gemini" in str(model): 
-            response = GEMINI().inference(self.model_id, prompt).strip()
+        elif "GEMINI" in str(model): 
+            response = Gemini().inference(self.model_id, prompt).strip()
         else:
             raise ValueError(f"Model {model} not supported")
 
